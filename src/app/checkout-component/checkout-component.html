@@ -1,0 +1,12 @@
+<h2>Checkout</h2>
+
+<app-ticket-item-component 
+  eventName="Show de Tecnologia 2026"
+  [(ticketQuantity)]="quantity"
+  (cancelRequest)="handleCancel()">
+</app-ticket-item-component>
+
+<div style="margin-top: 20px; font-weight: bold;">
+  <p>Status: {{ statusMessage() }}</p>
+  <p>Total: R$ {{ totalPrice() }}</p>
+</div>

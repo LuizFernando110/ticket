@@ -1,0 +1,17 @@
+<div style="border: 1px solid #ccc; padding: 1rem;">
+  <h3>Evento: {{ eventName() }}</h3>
+  
+  <div>
+    <button (click)="decrement()">-</button>
+    <span> Ingressos: {{ ticketQuantity() }} </span>
+    <button (click)="increment()">+</button>
+  </div>
+
+  <div style="margin-top: 10px;">
+    <input type="text" placeholder="Cupom de Desconto" (keyup.enter)="searchCupom($event)">
+  </div>
+
+  <button (click)="onCancel()" style="margin-top: 10px; color: red;">
+    Solicitar Cancelamento
+  </button>
+</div>
