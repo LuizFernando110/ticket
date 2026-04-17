@@ -1,12 +1,39 @@
-<h2>Checkout</h2>
+<app-card-component title="Seu Carrinho de Ingressos">
+  
+  @for (ticket of tickets(); track ticket.id) {
+    <div class="ticket-wrapper">
+      <h3>{{ ticket.name }}</h3>
+      
+      @switch (ticket.type) {
+        @case (0) { <p><strong>Status:</strong> Acesso Total</p> } @case (2) { <p><strong>Status:</strong> Obrigatório carteirinha</p> } @default { <p><strong>Status:</strong> Acesso Padrão</p> }
+      }
 
-<app-ticket-item-component 
-  eventName="Show de Tecnologia 2026"
-  [(ticketQuantity)]="quantity"
-  (cancelRequest)="handleCancel()">
-</app-ticket-item-component>
+      <p>Data: {{ ticket.date | date:'dd/MM/yyyy' }}</p>
+      <p>Preço unitário: {{ ticket.price | currency:'BRL' }}</p>
+      
+      <p>Descrição: {{ ticket.desc | summary:40 }}</p>
 
-<div style="margin-top: 20px; font-weight: bold;">
-  <p>Status: {{ statusMessage() }}</p>
-  <p>Total: R$ {{ totalPrice() }}</p>
-</div>
+      <app-ticket-item-component
+        [eventName]="ticket.name"
+        [eventDescription]="ticket.desc"
+        [eventTicketPrice]="ticket.price"
+        [eventDate]="ticket.date"
+        [ticketType]="ticket.type"
+        [(ticketQuantity)]="ticket.qty"
+      />
+      <hr>
+    </div>
+  } @empty {
+    <p>Seu carrinho está vazio!</p>
+  }
+
+  <div class="footer">
+    @if (totalQuantity() > 2) {
+      <div class="brinde-alert">
+        🎉 <strong>Você ganhou um brinde!</strong>
+      </div>
+    }
+
+    <h4>Total do Pedido: {{ calculateTotal() | currency:'BRL' }}</h4>
+  </div>
+</app-card-component>

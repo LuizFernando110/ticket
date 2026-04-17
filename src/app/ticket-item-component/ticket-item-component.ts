@@ -1,5 +1,11 @@
 import { Component, input, model, output } from '@angular/core';
 
+export enum TicketType {
+  VIP,
+  Standard,
+  MeiaEntrada,
+};
+
 @Component({
   selector: 'app-ticket-item-component',
   imports: [],
@@ -8,6 +14,11 @@ import { Component, input, model, output } from '@angular/core';
 })
 export class TicketItemComponent {
   eventName = input.required<string>();
+  eventDescription = input.required<string>();
+  eventTicketPrice = input.required<number>();
+  eventDate = input.required<Date>();
+  ticketType =  input.required<TicketType>();
+
   ticketQuantity = model(1);
   cancelRequest = output<void>();
   
